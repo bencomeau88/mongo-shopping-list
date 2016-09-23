@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var ItemSchema = new mongoose.Schema({
     name: { type: String, required: true },
-    age: {type: Number, required: false}
+    id: {type: Number, required: true}
 });
 
 var Item = mongoose.model('Item', ItemSchema);

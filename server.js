@@ -10,10 +10,10 @@ var storageLib = require('../shopping-list/storage.js');
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-var storage = new storageLib.Storage();
-storage.add('Broad beans');
-storage.add('Tomatoes');
-storage.add('Peppers');
+// var storage = new storageLib.Storage();
+// storage.add('Broad beans');
+// storage.add('Tomatoes');
+// storage.add('Peppers');
 
 var runServer = function(callback) {
     mongoose.connect(config.DATABASE_URL, function(err) {
@@ -37,7 +37,7 @@ app.get('/items', function(req, res) {
                 message: 'Internal Server Error'
             });
         }
-        res.json(items);
+        res.status(200).json(items);
     });
 });
 
@@ -54,11 +54,35 @@ app.post('/items', function(req, res) {
     });
 });
 
+app.put('/items/:id', function(req,res){
+    Item.update({_id: req.params.id}, {name:req.body.name}, function(err, item){
+        if(err){
+            return res.status(500).json({
+                message: 'put problems'
+            });
+        }
+        res.status(201).json(item)
+    });
+});
+
+app.delete('/items/:id', function(req,res){
+    Item.remove({_id: req.params.id}, function(err,item){
+        if(err){
+            return res.status(500).json({
+                message: 'delete error'
+            });
+        }
+        res.status(201).json(item);
+    });
+});
+
 app.use('*', function(req, res) {
     res.status(404).json({
         message: 'Not Found'
     });
 });
+
+
 
 if (require.main === module) {
     runServer(function(err) {
