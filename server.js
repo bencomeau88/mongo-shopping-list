@@ -10,10 +10,10 @@ var storageLib = require('../shopping-list/storage.js');
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-// var storage = new storageLib.Storage();
-// storage.add('Broad beans');
-// storage.add('Tomatoes');
-// storage.add('Peppers');
+var storage = new storageLib.Storage();
+storage.add('Broad beans');
+storage.add('Tomatoes');
+storage.add('Peppers');
 
 var runServer = function(callback) {
     mongoose.connect(config.DATABASE_URL, function(err) {
@@ -50,6 +50,7 @@ app.post('/items', function(req, res) {
                 message: 'Internal Server Error'
             });
         }
+        var item = storage.add(req.body.name);
         res.status(201).json(item);
     });
 });
@@ -57,11 +58,9 @@ app.post('/items', function(req, res) {
 app.put('/items/:id', function(req,res){
     Item.update({_id: req.params.id}, {name:req.body.name}, function(err, item){
         if(err){
-            return res.status(500).json({
-                message: 'put problems'
-            });
+            return res.status(404);
         }
-        res.status(201).json(item)
+        res.status(200).json(item)
     });
 });
 
@@ -92,6 +91,6 @@ if (require.main === module) {
     });
 };
 
-
+exports.storage = storage;
 exports.app = app;
 exports.runServer = runServer;
