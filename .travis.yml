@@ -8,4 +8,11 @@ addons:
     - mongodb-3.2-precise
     packages:
     - mongodb-org-server
-sudo: required 
+sudo: required
+deploy:
+  provider: heroku
+  api_key:
+    secure: fzYQJGwYApl7708zlHw3Q2UZKBEVzruduKLX7EgfC9+Hldql03+o3Ov6FyhyS+PK+TYOnArH6fMzgD8MgWljhVF7f9Z81YGczY/Q7S1an1t2/EGwo65NibvqNIcRNkeIQwVdAxNvykN4LrQqiOL273/Z2xPW9ZrHPk2GYaeAdxzDCGrGFbL5Eassw6mpCRUb/s7CepVKIGBy/1f4hmpdnJL8QHmE/aB3yzzjvuOpW7ZQLlfvVHr0fA1UyzUhoBrwFGnKfxz/ctUK/2+pbWXlZx7T3qyFU4N6jvQYjGEjLyqouO90Tc36J9op2Rtc3o7iG+ZfctJujqtsKhElZ4+/TpReKhvmIWQv+8Wa6V/700FLjXWM20xwRbgKkxn9T1VDclBrqjW9ovy91IqPmPQsWFGGGOlJKVzR6ZpIFA/XKR+ozrs/1vfD+uGjms6laXT+Ypmj6/t29SXUJuaqrxuDDOWtJL6YBAC8fAmOrTOgFmiBexyukUxmkPrpWlkw/6rGwswoU/EgzB3LD1p0ZvNd32TDSFAT3HGqLfxaaKK76GWgVSj19cPi2ztvrU6hh5hmfzPLxQewCaE8iVcJsPzdobBkZTtD2rnLeYvyMZUldhDyJCfi8sxYW6v5ibIW1o5LzfiHEdeZWxfLlHvjh2GJlNAUcciAoCCdy/yPSRbYZNU=
+  app: immense-sea-25416
+  on:
+    repo: bencomeau88/mongo-shopping-list
